@@ -12,7 +12,11 @@ namespace GFM.UserMessagingPlatform
         {
             _callback = callback;
 
+#if !UNITY_EDITOR && UNITY_ANDROID
             _gdpr = new AndroidGDPRProvider();
+#else
+            _gdpr = new DummyGDPRProvider();
+#endif
         }
 
         public void SetTagForUnderAgeOfConsent(bool value) => _gdpr.SetTagForUnderAgeOfConsent(value);
