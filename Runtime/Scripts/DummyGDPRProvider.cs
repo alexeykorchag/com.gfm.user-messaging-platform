@@ -10,29 +10,29 @@ namespace GFM.UserMessagingPlatform
 
         }
 
-        public void SetTagForUnderAgeOfConsent(bool value) { }
+        public void SetTagForUnderAge(bool value) { }
 
-        public void AddTestDeviceHashedId(DebugGeography debugGeography, string[] ids) { }
+        public void SetTestDevices(DebugGeography debugGeography, string[] ids) { }
 
-        public void Reset() { }
+        public void ResetConsent() { }
 
-        public void RequestConsentInfoUpdate(AndroidPluginCallback callback)
+        public void UpdateConsentInfo(PluginCallback callback)
         {
-            callback.onError("NotImplementedException");
+            callback.OnError("NotImplementedException");
         }
 
-        public bool IsConsentFormAvailable() => false;
+        public bool ConsentIsAvailable() => false;
 
-        public ConsentStatus GetConsentStatus() => ConsentStatus.UNKNOWN;
+        public ConsentStatus GetConsentStatus() => UserMessagingPlatform.ConsentStatus.UNKNOWN;
 
-        public void LoadForm(AndroidPluginCallback callback)
+        public void LoadForm(PluginCallback callback)
         {
-            callback.onError("NotImplementedException");
+            callback.OnError("NotImplementedException");
         }
 
-        public void Show(AndroidPluginCallback callback)
+        public void ShowForm(PluginCallback callback)
         {
-            callback.onError("NotImplementedException");
+            callback.OnError("NotImplementedException");
         }
 
     }

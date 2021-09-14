@@ -11,31 +11,26 @@ namespace GFM.UserMessagingPlatform
         public GDPR(Action<bool> callback)
         {
             _callback = callback;
-
-#if !UNITY_EDITOR && UNITY_ANDROID
-            _gdpr = new AndroidGDPRProvider();
-#else
-            _gdpr = new DummyGDPRProvider();
-#endif
+            _gdpr = GDPRProviderFactory.CreateInstance();
         }
 
-        public void SetTagForUnderAgeOfConsent(bool value) => _gdpr.SetTagForUnderAgeOfConsent(value);
+        public void SetTagForUnderAgeOfConsent(bool value) => _gdpr.SetTagForUnderAge(value);
 
-        public void AddTestDeviceHashedId(DebugGeography debugGeography, string[] ids) => _gdpr.AddTestDeviceHashedId(debugGeography, ids);
+        public void AddTestDeviceHashedId(DebugGeography debugGeography, string[] ids) => _gdpr.SetTestDevices(debugGeography, ids);
 
-        public void Reset() => _gdpr.Reset();
+        public void Reset() => _gdpr.ResetConsent();
 
         public void RequestConsentInfoUpdate()
         {
-            var callback = new AndroidPluginCallback();
+            var callback = new PluginCallback();
             callback.Success += OnConsentInfoUpdateSuccess;
             callback.Error += OnConsentInfoUpdateFailure;
-            _gdpr.RequestConsentInfoUpdate(callback);
+            _gdpr.UpdateConsentInfo(callback);
         }
 
         private void OnConsentInfoUpdateSuccess()
         {
-            var isConsentFormAvailable = _gdpr.IsConsentFormAvailable();
+            var isConsentFormAvailable = _gdpr.ConsentIsAvailable();
 
             Debug.Log($"GDPRHelper OnConsentInfoUpdateSuccess isConsentFormAvailable: {isConsentFormAvailable}");
             if (isConsentFormAvailable)
@@ -58,7 +53,7 @@ namespace GFM.UserMessagingPlatform
 
         private void LoadForm()
         {
-            var callback = new AndroidPluginCallback();
+            var callback = new PluginCallback();
             callback.Success += OnConsentFormLoadSuccess;
             callback.Error += OnConsentFormLoadFailure;
             _gdpr.LoadForm(callback);
@@ -87,9 +82,9 @@ namespace GFM.UserMessagingPlatform
 
         private void ShowForm()
         {
-            var callback = new AndroidPluginCallback();
+            var callback = new PluginCallback();
             callback.Error += OnConsentFormDismissed;
-            _gdpr.Show(callback);
+            _gdpr.ShowForm(callback);
         }
 
         private void OnConsentFormDismissed(string errorMessage)

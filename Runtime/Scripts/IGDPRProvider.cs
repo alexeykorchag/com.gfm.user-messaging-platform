@@ -2,13 +2,13 @@
 {
     public interface IGDPRProvider
     {
-        void SetTagForUnderAgeOfConsent(bool value);
-        void AddTestDeviceHashedId(DebugGeography debugGeography, string[] ids);
-        void Reset();
-        void RequestConsentInfoUpdate(AndroidPluginCallback callback);
-        bool IsConsentFormAvailable();
+        void SetTagForUnderAge(bool value);
+        void SetTestDevices(DebugGeography debugGeography, string[] ids);
+        void ResetConsent();
+        void UpdateConsentInfo(PluginCallback callback);
+        bool ConsentIsAvailable();
         ConsentStatus GetConsentStatus();
-        void LoadForm(AndroidPluginCallback callback);
-        void Show(AndroidPluginCallback callback);
+        void LoadForm(PluginCallback callback);
+        void ShowForm(PluginCallback callback);
     }
 }

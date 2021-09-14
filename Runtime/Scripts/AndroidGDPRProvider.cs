@@ -17,30 +17,30 @@ namespace GFM.UserMessagingPlatform
             }
         }
 
-        public void SetTagForUnderAgeOfConsent(bool value)
+        public void SetTagForUnderAge(bool value)
         {
             if (_helperObject == null) return;
             _helperObject.Call("setTagForUnderAgeOfConsent", value);
         }
 
-        public void AddTestDeviceHashedId(DebugGeography debugGeography, string[] ids)
+        public void SetTestDevices(DebugGeography debugGeography, string[] ids)
         {
             if (_helperObject == null) return;
             _helperObject.Call("addTestDeviceHashedId", (int) debugGeography, ids);
         }
 
-        public void Reset()
+        public void ResetConsent()
         {
             if (_helperObject == null) return;
             _helperObject.Call("reset");
         }
 
-        public void RequestConsentInfoUpdate(AndroidPluginCallback callback)
+        public void UpdateConsentInfo(PluginCallback callback)
         {
-            _helperObject.Call("requestConsentInfoUpdate", callback);
+            _helperObject.Call("requestConsentInfoUpdate", new AndroidPluginCallback(callback));
         }
 
-        public bool IsConsentFormAvailable()
+        public bool ConsentIsAvailable()
         {
             if (_helperObject == null)
                 return false;
@@ -56,14 +56,14 @@ namespace GFM.UserMessagingPlatform
             return (ConsentStatus)_helperObject.Call<int>("getConsentStatus");
         }
 
-        public void LoadForm(AndroidPluginCallback callback)
+        public void LoadForm(PluginCallback callback)
         {
-            _helperObject.Call("loadForm", callback);
+            _helperObject.Call("loadForm", new AndroidPluginCallback(callback));
         }
 
-        public void Show(AndroidPluginCallback callback)
+        public void ShowForm(PluginCallback callback)
         {
-            _helperObject.Call("show", callback);
+            _helperObject.Call("show", new AndroidPluginCallback(callback));
         }
 
     }
