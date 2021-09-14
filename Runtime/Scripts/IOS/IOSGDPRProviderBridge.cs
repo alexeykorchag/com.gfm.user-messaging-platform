@@ -1,4 +1,4 @@
-﻿#if UNITY_IOS
+﻿#if !UNITY_EDITOR &&  UNITY_IOS
 using System.Runtime.InteropServices;
 
 namespace GFM.UserMessagingPlatform

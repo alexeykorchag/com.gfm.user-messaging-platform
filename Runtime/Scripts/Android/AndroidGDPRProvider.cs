@@ -66,6 +66,7 @@ namespace GFM.UserMessagingPlatform
             _helperObject.Call("show", new AndroidPluginCallback(callback));
         }
 
+        public override string ToString() => "AndroidGDPRProvider";
     }
 }
 #endif

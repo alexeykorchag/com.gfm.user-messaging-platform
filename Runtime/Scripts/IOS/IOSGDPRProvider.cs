@@ -1,10 +1,9 @@
-﻿#if UNITY_IOS
+﻿#if !UNITY_EDITOR &&  UNITY_IOS
 
 using UnityEngine;
 
 namespace GFM.UserMessagingPlatform
 {
-
     public class IOSGDPRProvider : IGDPRProvider
     {
         private IOSGDPRProviderListener _listener;
@@ -51,6 +50,8 @@ namespace GFM.UserMessagingPlatform
             _listener.SetShowForm(callback);
             IOSGDPRProviderBridge.Show();
         }
+
+        public override string ToString() => "IOSGDPRProvider";
     }
 
 }

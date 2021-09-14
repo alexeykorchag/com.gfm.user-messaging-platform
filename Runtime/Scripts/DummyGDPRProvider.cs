@@ -1,7 +1,4 @@
-﻿#pragma warning disable IDE0063 // Использовать простой оператор using
-
-
-namespace GFM.UserMessagingPlatform
+﻿namespace GFM.UserMessagingPlatform
 {
     public class DummyGDPRProvider : IGDPRProvider
     {
@@ -34,6 +31,8 @@ namespace GFM.UserMessagingPlatform
         {
             callback.OnError("NotImplementedException");
         }
+
+        public override string ToString() => "DummyGDPRProvider";
 
     }
 }
